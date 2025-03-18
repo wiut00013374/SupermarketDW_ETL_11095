@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="(localdb)_MSSQLLocalDB.DW_11095"
+  DTS:DTSID="{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DW_11095;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-SupermarketDW_ETL_11095-{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}(localdb)\MSSQLLocalDB.DW_11095;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
