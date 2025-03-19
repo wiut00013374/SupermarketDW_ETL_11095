@@ -1,28 +1,124 @@
-﻿<?xml version="1.0"?>
-<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
-  DTS:refId="Package"
-  DTS:CreationDate="3/18/2025 9:06:22 PM"
-  DTS:CreationName="Microsoft.Package"
-  DTS:CreatorComputerName="LAPTOP-1N1SQG72"
-  DTS:CreatorName="LAPTOP-1N1SQG72\Hp"
-  DTS:DTSID="{2CF0E773-B085-4809-B42A-4C253F8B8FB5}"
-  DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.0"
-  DTS:LocaleID="1033"
-  DTS:ObjectName="DimCustomer_Load"
-  DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{59F2EB33-9AB1-41D6-A368-DAE722856426}">
-  <DTS:Property
-    DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:Variables />
-  <DTS:Executables />
-  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
-<!--If you manually edit this section and make a mistake, you can delete it. -->
-<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
-<Objects
-  Version="8">
-  <!--Each node below will contain properties that do not affect runtime behavior.-->
+﻿Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Lookup Match Output]"
+          TopLeft="439.733324306904,255.666667021871">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.2666672342189"
+              Start="0,0"
+              End="0,38.7666672342189">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.7666672342189" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Lookup No Match Output]"
+          TopLeft="439.733324306904,255.666667021871">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10,136.266667226893"
+              Start="0,0"
+              End="10,128.766667226893">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.1333336134467" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,64.1333336134467"
+                    Point2="0,68.1333336134467"
+                    Point3="4,68.1333336134467" />
+                  <mssgle:LineSegment
+                    End="6,68.1333336134467" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6,68.1333336134467"
+                    Point2="10,68.1333336134467"
+                    Point3="10,72.1333336134467" />
+                  <mssgle:LineSegment
+                    End="10,128.766667226893" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Changed]"
+          TopLeft="393.266658788406,343.53333425609">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="56.4666657331712,48.3999999926744"
+              Start="0,0"
+              End="56.4666657331712,40.8999999926744">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1999999963372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1999999963372"
+                    Point2="0,24.1999999963372"
+                    Point3="4,24.1999999963372" />
+                  <mssgle:LineSegment
+                    End="52.4666657331712,24.1999999963372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="52.4666657331712,24.1999999963372"
+                    Point2="56.4666657331712,24.1999999963372"
+                    Point3="56.4666657331712,28.1999999963372" />
+                  <mssgle:LineSegment
+                    End="56.4666657331712,40.8999999926744" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Derived Column Output]"
+          TopLeft="449.733324521577,433.533334248764">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.8666666301581"
+              Start="0,0"
+              End="0,44.3666666301581">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.3666666301581" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
