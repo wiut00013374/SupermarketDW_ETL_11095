@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Main"
   DTS:PackageType="5"
-  DTS:VersionBuild="4"
-  DTS:VersionGUID="{277D6067-77A1-4759-9F78-CA8DDF72C28E}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{2952F442-4889-4E6C-9A5F-075880635656}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -116,7 +116,26 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C8DB437B-BDE9-4914-A661-4372E5C3FAE3}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="EndDate">
+      <DTS:VariableValue
+        DTS:DataType="7">3/19/2025 8:44:20 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{01D10E3B-154F-4BE4-84C7-20922A0C31C6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="StartDate">
+      <DTS:VariableValue
+        DTS:DataType="7">3/19/2025 8:44:16 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Dimension Loads"
@@ -146,19 +165,19 @@
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Dimension Loads\Load Date Dimension"
+          DTS:refId="Package\Dimension Loads\Load Geography Dimension"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{78A06FCA-16D5-4C4F-93BA-CAADEAAF415C}"
+          DTS:DTSID="{408EA74E-72A7-41D2-B136-22141574625D}"
           DTS:ExecutableType="Microsoft.ExecutePackageTask"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Load Date Dimension"
+          DTS:ObjectName="Load Geography Dimension"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>DimDate_Load.dtsx</PackageName>
+              <PackageName>DimGeography_Load.dtsx</PackageName>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -253,7 +272,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Create Log Table"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -270,7 +289,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Verify Database Exists"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -299,4 +318,113 @@
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\Fact Loads" />
   </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="201.6,41.6"
+          Id="Package\Dimension Loads\Load Customer Dimension"
+          TopLeft="5.50000000000001,5.49999999999995" />
+        <NodeLayout
+          Size="192,41.6"
+          Id="Package\Dimension Loads\Load Product Dimension"
+          TopLeft="507.3,5.49999999999984" />
+        <NodeLayout
+          Size="208,41.6"
+          Id="Package\Dimension Loads\Load Geography Dimension"
+          TopLeft="258.566652233237,8.19999817391243" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="704.8,116.8"
+          Size="704.8,160"
+          Id="Package\Dimension Loads"
+          TopLeft="5.5,211.1" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Fact Loads\ETL Completion"
+          TopLeft="5.49999999999997,5.49999999999995" />
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Fact Loads\Load Sales Facts"
+          TopLeft="218.7,5.49999999999995" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="382.4,102.4"
+          Size="382.4,145.6"
+          Id="Package\Fact Loads"
+          TopLeft="166.7,416.7" />
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Initialization\Create Log Table"
+          TopLeft="5.49999999999999,5.49999999999995" />
+        <NodeLayout
+          Size="183.2,41.6"
+          Id="Package\Initialization\Verify Database Exists"
+          TopLeft="224.1,5.49999999999995" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="412.8,102.4"
+          Size="412.8,145.6"
+          Id="Package\Initialization"
+          TopLeft="151.5,5.50000000000007" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="357.9,151.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="357.9,371.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.6"
+              Start="0,0"
+              End="0,38.1">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.1" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{5FEC59F5-DE31-47BF-BCC6-2A53D948D4EB}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{14BE228B-CCA0-4C1B-A9F4-337B10049405}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -373,7 +373,7 @@
                       refId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Customer ID]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
+                      errorRowDisposition="IgnoreFailure"
                       externalMetadataColumnId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Customer ID]"
                       lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Customer ID]"
                       name="Customer ID"
@@ -394,7 +394,7 @@
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
+                      errorRowDisposition="IgnoreFailure"
                       externalMetadataColumnId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Country]"
                       length="50"
                       lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Country]"
@@ -811,7 +811,7 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
                 <input
                   refId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
+                  errorRowDisposition="RedirectRow"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
@@ -950,9 +950,9 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
           SQLTask:Connection="{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}"
           SQLTask:SqlStatementSource="UPDATE ETL_Log&#xA;SET EndTime = GETDATE(),&#xA;    RowsProcessed = ?,&#xA;    Status = 'Completed'&#xA;WHERE PackageName = 'DimCustomer_Load.dtsx'&#xA;  AND TaskName = 'Load Customer Dimension'&#xA;  AND EndTime IS NULL" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
-            SQLTask:ParameterName="NewParameterName"
+            SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::RowsProcessed"
-            SQLTask:ParameterDirection="Input"
+            SQLTask:ParameterDirection="Output"
             SQLTask:DataType="3"
             SQLTask:ParameterSize="-1" />
         </SQLTask:SqlTaskData>
@@ -991,7 +991,7 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
           SQLTask:Connection="{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}"
           SQLTask:SqlStatementSource="SELECT ? = COUNT(*) FROM Dim_Customer" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
-            SQLTask:ParameterName="NewParameterName"
+            SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::RowsProcessed"
             SQLTask:ParameterDirection="Output"
             SQLTask:DataType="3"
@@ -1039,13 +1039,21 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\Customer Dimension ETL"
+          TopLeft="88.333328507013,124.799999132156" />
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\Log ETL Completion"
+          TopLeft="102.499994399647,323.266664418711" />
+        <NodeLayout
           Size="142.4,41.6"
           Id="Package\Log ETL Start"
           TopLeft="81.6666622045969,42.4666663713588" />
         <NodeLayout
-          Size="197.6,41.6"
-          Id="Package\Customer Dimension ETL"
-          TopLeft="88.333328507013,124.799999132156" />
+          Size="129.6,41.6"
+          Id="Package\Row Count"
+          TopLeft="104.166660975251,220.133331802554" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="152.866662204597,84.0666663713588">
@@ -1080,10 +1088,6 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Row Count"
-          TopLeft="104.166660975251,220.133331802554" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="187.133328507013,166.399999132156">
@@ -1118,10 +1122,6 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="172.8,41.6"
-          Id="Package\Log ETL Completion"
-          TopLeft="102.499994399647,323.266664418711" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="168.966660975251,261.733331802554">
@@ -1165,89 +1165,69 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="151.2,41.6"
-          Id="Package\Customer Dimension ETL\Flat File Source"
-          TopLeft="34.9999980876844,44.1999996926387" />
-        <NodeLayout
           Size="156,41.6"
           Id="Package\Customer Dimension ETL\Data Conversion"
           TopLeft="55.8333302827346,144.733332326876" />
-        <EdgeLayout
-          Id="Package\Customer Dimension ETL.Paths[Flat File Source Output]"
-          TopLeft="110.599998087684,85.7999996926387">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="23.2333321950503,58.9333326342371"
-              Start="0,0"
-              End="23.2333321950503,51.4333326342371">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.4666663171185" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,25.4666663171185"
-                    Point2="0,29.4666663171185"
-                    Point3="4,29.4666663171185" />
-                  <mssgle:LineSegment
-                    End="19.2333321950503,29.4666663171185" />
-                  <mssgle:CubicBezierSegment
-                    Point1="19.2333321950503,29.4666663171185"
-                    Point2="23.2333321950503,29.4666663171185"
-                    Point3="23.2333321950503,33.4666663171185" />
-                  <mssgle:LineSegment
-                    End="23.2333321950503,51.4333326342371" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="112.8,41.6"
           Id="Package\Customer Dimension ETL\Lookup"
           TopLeft="104.999994263053,248.733331603673" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Customer Dimension ETL\Derived Column"
+          TopLeft="113.333327141073,429.866663677428" />
+        <NodeLayout
+          Size="151.2,41.6"
+          Id="Package\Customer Dimension ETL\Flat File Source"
+          TopLeft="34.9999980876844,44.1999996926387" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Customer Dimension ETL\OLE DB Command"
+          TopLeft="437.499976096055,259.133331531352" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Customer Dimension ETL\Conditional Split"
+          TopLeft="115.833327004479,336.26666432831" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Customer Dimension ETL\OLE DB Destination"
+          TopLeft="396.666644993756,338.86666431023" />
         <EdgeLayout
-          Id="Package\Customer Dimension ETL.Paths[Data Conversion Output]"
-          TopLeft="133.833330282735,186.333332326876">
+          Id="Package\Customer Dimension ETL.Paths[OLE DB Destination Error Output]"
+          TopLeft="482.266644993756,338.86666431023">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="27.5666639803186,62.399999276797"
+              EndConnector="38.833331102299,-38.133332778878"
               Start="0,0"
-              End="27.5666639803186,54.899999276797">
+              End="38.833331102299,-30.633332778878">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.1999996383985" />
+                    End="0,-15.066666389439" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,27.1999996383985"
-                    Point2="0,31.1999996383985"
-                    Point3="4,31.1999996383985" />
+                    Point1="0,-15.066666389439"
+                    Point2="0,-19.066666389439"
+                    Point3="4,-19.066666389439" />
                   <mssgle:LineSegment
-                    End="23.5666639803186,31.1999996383985" />
+                    End="34.833331102299,-19.066666389439" />
                   <mssgle:CubicBezierSegment
-                    Point1="23.5666639803186,31.1999996383985"
-                    Point2="27.5666639803186,31.1999996383985"
-                    Point3="27.5666639803186,35.1999996383985" />
+                    Point1="34.833331102299,-19.066666389439"
+                    Point2="38.833331102299,-19.066666389439"
+                    Point3="38.833331102299,-23.066666389439" />
                   <mssgle:LineSegment
-                    End="27.5666639803186,54.899999276797" />
+                    End="38.833331102299,-30.633332778878" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-53.7922406988505,-14.066666389439,146.4178125,11.43359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Customer Dimension ETL\Conditional Split"
-          TopLeft="115.833327004479,336.26666432831" />
         <EdgeLayout
           Id="Package\Customer Dimension ETL.Paths[Lookup Match Output]"
           TopLeft="161.399994263053,290.333331603673">
@@ -1284,10 +1264,108 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Customer Dimension ETL\Derived Column"
-          TopLeft="113.333327141073,429.866663677428" />
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Flat File Source Output]"
+          TopLeft="110.599998087684,85.7999996926387">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="23.2333321950503,58.9333326342371"
+              Start="0,0"
+              End="23.2333321950503,51.4333326342371">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.4666663171185" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.4666663171185"
+                    Point2="0,29.4666663171185"
+                    Point3="4,29.4666663171185" />
+                  <mssgle:LineSegment
+                    End="19.2333321950503,29.4666663171185" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.2333321950503,29.4666663171185"
+                    Point2="23.2333321950503,29.4666663171185"
+                    Point3="23.2333321950503,33.4666663171185" />
+                  <mssgle:LineSegment
+                    End="23.2333321950503,51.4333326342371" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Derived Column Output]"
+          TopLeft="213.866660474406,429.866663677428">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="268.39998451935,-49.399999367198"
+              Start="0,0"
+              End="268.39998451935,-41.899999367198">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-16.067150002012" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-16.067150002012"
+                    Point2="0,-20.067150002012"
+                    Point3="4,-20.067150002012" />
+                  <mssgle:LineSegment
+                    End="264.39998451935,-20.067150002012" />
+                  <mssgle:CubicBezierSegment
+                    Point1="264.39998451935,-20.067150002012"
+                    Point2="268.39998451935,-20.067150002012"
+                    Point3="268.39998451935,-24.067150002012" />
+                  <mssgle:LineSegment
+                    End="268.39998451935,-41.899999367198" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Data Conversion Output]"
+          TopLeft="133.833330282735,186.333332326876">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27.5666639803186,62.399999276797"
+              Start="0,0"
+              End="27.5666639803186,54.899999276797">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.1999996383985" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.1999996383985"
+                    Point2="0,31.1999996383985"
+                    Point3="4,31.1999996383985" />
+                  <mssgle:LineSegment
+                    End="23.5666639803186,31.1999996383985" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.5666639803186,31.1999996383985"
+                    Point2="27.5666639803186,31.1999996383985"
+                    Point3="27.5666639803186,35.1999996383985" />
+                  <mssgle:LineSegment
+                    End="27.5666639803186,54.899999276797" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Customer Dimension ETL.Paths[Changed]"
           TopLeft="191.183327072776,377.86666432831">
@@ -1308,85 +1386,7 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-19.8755078125,16.4184567058086,39.751015625,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Customer Dimension ETL\OLE DB Destination"
-          TopLeft="391.666645266944,335.39999766767" />
-        <EdgeLayout
-          Id="Package\Customer Dimension ETL.Paths[Derived Column Output]"
-          TopLeft="213.866660474407,429.866663677428">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="263.399984792538,-52.8666660097573"
-              Start="0,0"
-              End="263.399984792538,-45.3666660097573">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,-17.4753710630309" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,-17.4753710630309"
-                    Point2="0,-21.4753710630309"
-                    Point3="4,-21.4753710630309" />
-                  <mssgle:LineSegment
-                    End="259.399984792538,-21.4753710630309" />
-                  <mssgle:CubicBezierSegment
-                    Point1="259.399984792538,-21.4753710630309"
-                    Point2="263.399984792538,-21.4753710630309"
-                    Point3="263.399984792538,-25.4753710630309" />
-                  <mssgle:LineSegment
-                    End="263.399984792538,-45.3666660097573" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="167.2,41.6"
-          Id="Package\Customer Dimension ETL\OLE DB Command"
-          TopLeft="437.499976096055,259.133331531352" />
-        <EdgeLayout
-          Id="Package\Customer Dimension ETL.Paths[OLE DB Destination Error Output]"
-          TopLeft="477.266645266944,335.39999766767">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="43.8333308291108,-34.6666661363178"
-              Start="0,0"
-              End="43.8333308291108,-27.1666661363178">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,-13.3333330681589" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,-13.3333330681589"
-                    Point2="0,-17.3333330681589"
-                    Point3="4,-17.3333330681589" />
-                  <mssgle:LineSegment
-                    End="39.8333308291108,-17.3333330681589" />
-                  <mssgle:CubicBezierSegment
-                    Point1="39.8333308291108,-17.3333330681589"
-                    Point2="43.8333308291108,-17.3333330681589"
-                    Point3="43.8333308291108,-21.3333330681589" />
-                  <mssgle:LineSegment
-                    End="43.8333308291108,-27.1666661363178" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-51.2922408354446,-12.3333330681589,146.4178125,11.43359375"
+              BoundingBox="-19.8755078125,16.4184567058087,39.751015625,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1399,7 +1399,7 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1409,7 +1409,7 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
