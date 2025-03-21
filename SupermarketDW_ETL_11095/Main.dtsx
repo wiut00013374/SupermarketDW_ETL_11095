@@ -1,139 +1,40 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="3/18/2025 9:05:42 PM"
+  DTS:CreationDate="3/21/2025 6:28:46 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="LAPTOP-1N1SQG72"
   DTS:CreatorName="LAPTOP-1N1SQG72\Hp"
-  DTS:DTSID="{80C1880B-47E6-43EC-BEAF-756036A3779E}"
+  DTS:DTSID="{4A0DCB9B-2086-4714-889F-13E7E74E5A1F}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="Main"
+  DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{2952F442-4889-4E6C-9A5F-075880635656}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{0A89D6ED-B0F3-4713-A6FE-768AB0669DCE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:ConnectionManagers>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[DW_11095_DB]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{1BF9B29B-52B6-47DC-90BB-D26BAF15A4AA}"
-      DTS:ObjectName="DW_11095_DB">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="1"
-          DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DW_11095;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Main-{1BF9B29B-52B6-47DC-90BB-D26BAF15A4AA}(localdb)\MSSQLLocalDB.DW_11095;Auto Translate=False;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Supermarket_Source_CSV]"
-      DTS:CreationName="FLATFILE"
-      DTS:DTSID="{348D58CF-7D69-4F87-BD23-BE7AABCCF2F1}"
-      DTS:ObjectName="Supermarket_Source_CSV">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:Format="Delimited"
-          DTS:LocaleID="1033"
-          DTS:HeaderRowDelimiter="_x000D__x000A_"
-          DTS:ColumnNamesInFirstDataRow="True"
-          DTS:RowDelimiter=""
-          DTS:TextQualifier="_x003C_none_x003E_"
-          DTS:CodePage="1252"
-          DTS:ConnectionString="C:\Users\Hp\Downloads\supermarket_data.csv\supermarket_data.csv">
-          <DTS:FlatFileColumns>
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:DataType="3"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Invoice"
-              DTS:DTSID="{6926766E-B84E-4FFD-B7D3-06295C939374}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="StockCode"
-              DTS:DTSID="{7D1EE9D3-D087-4B64-9D12-22D75405BEBD}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Description"
-              DTS:DTSID="{72889EDC-12EE-420D-AEB2-476DD3926901}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:DataType="3"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Quantity"
-              DTS:DTSID="{562CEAC1-AADC-4054-9B3A-76244E9D1A2D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:DataType="135"
-              DTS:TextQualified="True"
-              DTS:ObjectName="InvoiceDate"
-              DTS:DTSID="{C304B2D6-2915-4772-92D3-516AA0781F55}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:DataType="14"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Price"
-              DTS:DTSID="{AB4EAB14-8599-4F8A-AB76-4C98B2E08D34}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:DataType="3"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Customer ID"
-              DTS:DTSID="{D704517F-0353-4F9E-B193-E581E81C8D62}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000A_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Country"
-              DTS:DTSID="{B8DB16DC-75E8-4A6E-A3F4-40A3538585C5}"
-              DTS:CreationName="" />
-          </DTS:FlatFileColumns>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-  </DTS:ConnectionManagers>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{C8DB437B-BDE9-4914-A661-4372E5C3FAE3}"
+      DTS:DTSID="{528978BE-05D4-4706-B645-8AB55784E73D}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
-      DTS:ObjectName="EndDate">
+      DTS:ObjectName="DatabaseExists">
       <DTS:VariableValue
-        DTS:DataType="7">3/19/2025 8:44:20 PM</DTS:VariableValue>
+        DTS:DataType="11">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{01D10E3B-154F-4BE4-84C7-20922A0C31C6}"
-      DTS:IncludeInDebugDump="6789"
+      DTS:DTSID="{8E5D7C59-D38D-48F3-9E02-8C8457A611FC}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="GETDATE()"
+      DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="StartDate">
       <DTS:VariableValue
-        DTS:DataType="7">3/19/2025 8:44:16 PM</DTS:VariableValue>
+        DTS:DataType="7">3/21/2025 6:57:08 PM</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -141,7 +42,7 @@
       DTS:refId="Package\Dimension Loads"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{2C2DE991-3FCC-4DB2-81A5-C3B108135F38}"
+      DTS:DTSID="{ACC1155B-205E-4CDC-B1AF-DA47646FF3AD}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Dimension Loads">
@@ -151,7 +52,7 @@
           DTS:refId="Package\Dimension Loads\Load Customer Dimension"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{3DFEF187-5C49-4A16-B1A4-721786CC3A22}"
+          DTS:DTSID="{AC347F5B-9D5A-4B7E-A409-B94F5EC90C10}"
           DTS:ExecutableType="Microsoft.ExecutePackageTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Load Customer Dimension"
@@ -168,7 +69,7 @@
           DTS:refId="Package\Dimension Loads\Load Geography Dimension"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{408EA74E-72A7-41D2-B136-22141574625D}"
+          DTS:DTSID="{03984E4A-9595-42E0-BD56-D811C435E512}"
           DTS:ExecutableType="Microsoft.ExecutePackageTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Load Geography Dimension"
@@ -185,7 +86,7 @@
           DTS:refId="Package\Dimension Loads\Load Product Dimension"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{F04116CB-55FF-48E6-BDF3-CC76D801BA0F}"
+          DTS:DTSID="{864E29FA-8B2D-46AD-B21E-59703A9A27DA}"
           DTS:ExecutableType="Microsoft.ExecutePackageTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Load Product Dimension"
@@ -201,20 +102,20 @@
       </DTS:Executables>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Fact Loads"
+      DTS:refId="Package\Fact Load"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{DB744F85-509E-4F1C-907B-C8A7E31115D6}"
+      DTS:DTSID="{BD800003-3A32-41C2-8D1E-ABEE50BA3612}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Fact Loads">
+      DTS:ObjectName="Fact Load">
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Fact Loads\ETL Completion"
+          DTS:refId="Package\Fact Load\ETL Completion"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{9131467F-5DD1-4702-A3D4-DD548508E61A}"
+          DTS:DTSID="{3673D05A-0ADF-4C63-8533-CA259297BCCD}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="ETL Completion"
@@ -223,22 +124,22 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1BF9B29B-52B6-47DC-90BB-D26BAF15A4AA}"
-              SQLTask:SqlStatementSource="INSERT INTO ETL_Log (PackageName, TaskName, StartTime, EndTime, RowsProcessed, Status)&#xA;VALUES ('Main.dtsx', 'Full ETL Process', ?, GETDATE(), NULL, 'Completed')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:Connection="{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}"
+              SQLTask:SqlStatementSource="INSERT INTO ETL_Log (PackageName, TaskName, StartTime, EndTime, Status)&#xA;VALUES ('Main.dtsx', 'Full ETL Process', ?, GETDATE(), 'Completed');" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
-                SQLTask:DtsVariableName="System::StartTime"
+                SQLTask:DtsVariableName="User::StartDate"
                 SQLTask:ParameterDirection="Input"
-                SQLTask:DataType="7"
+                SQLTask:DataType="135"
                 SQLTask:ParameterSize="-1" />
             </SQLTask:SqlTaskData>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Fact Loads\Load Sales Facts"
+          DTS:refId="Package\Fact Load\Load Sales Facts"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
-          DTS:DTSID="{C234EBB1-97A2-4A50-AB0A-416C072F2BB7}"
+          DTS:DTSID="{D181A5EA-D621-454F-BAB6-42191A2F09DB}"
           DTS:ExecutableType="Microsoft.ExecutePackageTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Load Sales Facts"
@@ -257,7 +158,7 @@
       DTS:refId="Package\Initialization"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:DTSID="{2A53AD18-083B-4637-B223-8FE67B5FC2E5}"
+      DTS:DTSID="{3C02E6CC-FF83-4FAA-A002-2CBFC3F49FA9}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="Initialization">
@@ -267,7 +168,7 @@
           DTS:refId="Package\Initialization\Create Log Table"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{62A4EC7B-60B5-49CC-A228-C536A17661AA}"
+          DTS:DTSID="{0468452D-FCF6-47BD-A72B-CB3A3E15F4F6}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Create Log Table"
@@ -276,35 +177,50 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1BF9B29B-52B6-47DC-90BB-D26BAF15A4AA}"
-              SQLTask:SqlStatementSource="IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'ETL_Log')&#xA;BEGIN&#xA;    CREATE TABLE ETL_Log (&#xA;        LogID INT IDENTITY(1,1) PRIMARY KEY,&#xA;        PackageName VARCHAR(100),&#xA;        TaskName VARCHAR(100),&#xA;        StartTime DATETIME,&#xA;        EndTime DATETIME NULL,&#xA;        RowsProcessed INT NULL,&#xA;        ErrorMessage VARCHAR(MAX) NULL,&#xA;        Status VARCHAR(20)&#xA;    )&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:Connection="{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}"
+              SQLTask:SqlStatementSource="IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'ETL_Log')&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[ETL_Log] (&#xA;        LogID INT IDENTITY(1,1) PRIMARY KEY,&#xA;        PackageName VARCHAR(100),&#xA;        TaskName VARCHAR(100),&#xA;        StartTime DATETIME,&#xA;        EndTime DATETIME,&#xA;        RowsProcessed INT,&#xA;        Status VARCHAR(50)&#xA;    );&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Initialization\Verify Database Exists"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
-          DTS:DTSID="{6522CFD0-63E6-4642-9211-5D722000CB6C}"
+          DTS:DTSID="{C40DD938-223A-45AC-81DB-1E56FBC2BB15}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Verify Database Exists"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{1BF9B29B-52B6-47DC-90BB-D26BAF15A4AA}"
-              SQLTask:SqlStatementSource="IF NOT EXISTS (SELECT 1 FROM sys.databases WHERE name = 'DW_11095')&#xA;BEGIN&#xA;    RAISERROR('Database DW_11095 does not exist', 16, 1)&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:Connection="{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}"
+              SQLTask:SqlStatementSource="SELECT CASE &#xA;           WHEN EXISTS (SELECT 1 FROM sys.databases WHERE name = 'DW_11095') &#xA;           THEN 1 &#xA;           ELSE 0 &#xA;       END AS DatabaseExists;"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="DatabaseExists"
+                SQLTask:DtsVariableName="User::DatabaseExists" />
+            </SQLTask:SqlTaskData>
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Initialization.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{85387DD9-E6B2-469A-B23A-145383F637FF}"
+          DTS:From="Package\Initialization\Verify Database Exists"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Initialization\Create Log Table" />
+      </DTS:PrecedenceConstraints>
     </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{51CAC114-AF67-47BC-93C7-3F6CA264C46D}"
+      DTS:DTSID="{3E51A31B-5B53-4D8F-9836-55472F30402C}"
       DTS:From="Package\Initialization"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -312,12 +228,59 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{9FABE1EC-28D0-433C-A357-1C39A634ACF7}"
+      DTS:DTSID="{A5B198E0-6FE2-4672-B109-B70157F32708}"
       DTS:From="Package\Dimension Loads"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Fact Loads" />
+      DTS:To="Package\Fact Load" />
   </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{F717AA82-8F77-4B35-BB10-96362A330787}"
+      DTS:EventID="0"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{1D9A8FAD-326F-4681-A5FE-3E3FF20B39C2}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Log ETL Failure"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E9EADBD7-2C4F-4623-9C28-6721532E412A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Log ETL Failure"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}"
+              SQLTask:SqlStatementSource="INSERT INTO ETL_Log (PackageName, TaskName, StartTime, EndTime, Status)&#xA;VALUES ('Main.dtsx', 'Full ETL Process', ?, GETDATE(), 'Failed');" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::StartDate"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -331,68 +294,27 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="201.6,41.6"
-          Id="Package\Dimension Loads\Load Customer Dimension"
-          TopLeft="5.50000000000001,5.49999999999995" />
-        <NodeLayout
-          Size="192,41.6"
-          Id="Package\Dimension Loads\Load Product Dimension"
-          TopLeft="507.3,5.49999999999984" />
-        <NodeLayout
-          Size="208,41.6"
-          Id="Package\Dimension Loads\Load Geography Dimension"
-          TopLeft="258.566652233237,8.19999817391243" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="704.8,116.8"
-          Size="704.8,160"
-          Id="Package\Dimension Loads"
-          TopLeft="5.5,211.1" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Fact Loads\ETL Completion"
-          TopLeft="5.49999999999997,5.49999999999995" />
-        <NodeLayout
-          Size="158.4,41.6"
-          Id="Package\Fact Loads\Load Sales Facts"
-          TopLeft="218.7,5.49999999999995" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="382.4,102.4"
-          Size="382.4,145.6"
-          Id="Package\Fact Loads"
-          TopLeft="166.7,416.7" />
+          Size="183.2,41.6"
+          Id="Package\Initialization\Verify Database Exists"
+          TopLeft="14.4333158037737,14.7999993852775" />
         <NodeLayout
           Size="158.4,41.6"
           Id="Package\Initialization\Create Log Table"
-          TopLeft="5.49999999999999,5.49999999999995" />
-        <NodeLayout
-          Size="183.2,41.6"
-          Id="Package\Initialization\Verify Database Exists"
-          TopLeft="224.1,5.49999999999995" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="412.8,102.4"
-          Size="412.8,145.6"
-          Id="Package\Initialization"
-          TopLeft="151.5,5.50000000000007" />
+          TopLeft="241.933303373722,19.1333326884773" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="357.9,151.1">
+          Id="Package\Initialization.PrecedenceConstraints[Constraint]"
+          TopLeft="197.633315803774,37.7666660368774">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
+              EndConnector="44.2999875699485,0"
               Start="0,0"
-              End="0,52.4999999999999">
+              End="36.7999875699485,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.4999999999999" />
+                    End="36.7999875699485,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -401,20 +323,83 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="410.4,100.8"
+          Size="410.4,144"
+          Id="Package\Initialization"
+          TopLeft="306.66664991114,30.3333331223991" />
+        <NodeLayout
+          Size="201.6,41.6"
+          Id="Package\Dimension Loads\Load Customer Dimension"
+          TopLeft="33.6333267312914,10.4666648526325" />
+        <NodeLayout
+          Size="208,41.6"
+          Id="Package\Dimension Loads\Load Geography Dimension"
+          TopLeft="306.966645130351,8.73333153135252" />
+        <NodeLayout
+          Size="192,41.6"
+          Id="Package\Dimension Loads\Load Product Dimension"
+          TopLeft="583.633296680617,12.1999981739124" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="835.2,75.2"
+          Size="835.2,118.4"
+          Id="Package\Dimension Loads"
+          TopLeft="87.4999952192112,207.133331892954" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="357.9,371.1">
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="508.483322565175,174.333333122399">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,45.6"
+              EndConnector="0,32.7999987705549"
               Start="0,0"
-              End="0,38.1">
+              End="0,25.2999987705549">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,38.1" />
+                    End="0,25.2999987705549" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Fact Load\Load Sales Facts"
+          TopLeft="22.6333089740751,7.23333332127987" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Fact Load\ETL Completion"
+          TopLeft="190.133299822279,12.3999971433482" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="360,108.8"
+          Size="360,152"
+          Id="Package\Fact Load"
+          TopLeft="324.999982242784,356.19999752303" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="505.049988730997,325.533331892954">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.6666656300758"
+              Start="0,0"
+              End="0,23.1666656300758">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.1666656300758" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -426,5 +411,17 @@
       </GraphLayout>
     </LayoutInfo>
   </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package.EventHandlers[OnError]\Log ETL Failure"
+          TopLeft="392.999994143844,149.999997764826" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

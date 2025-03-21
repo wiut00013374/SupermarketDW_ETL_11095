@@ -11,11 +11,20 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{53DF3417-B1F5-4557-B9D6-3D49DBA7E4C0}">
+  DTS:VersionBuild="38"
+  DTS:VersionGUID="{F5F81632-CFBE-47AA-9B81-474F7B1FC4D6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D129D2AC-D228-4733-AC16-8B7E90821166}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorRows">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{FD94E7CA-7A18-4DF0-A18C-BE4F8C50534D}"
@@ -24,6 +33,15 @@
       DTS:ObjectName="RowsProcessed">
       <DTS:VariableValue
         DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4BCDAAE9-DC92-4450-B8E7-F3F61AEFD498}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="StartDate">
+      <DTS:VariableValue
+        DTS:DataType="7">3/21/2025 6:10:52 PM</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -85,68 +103,72 @@
           version="1">
           <components>
             <component
-              refId="Package\Product Dimension ETL\Conditional Split"
+              refId="Package\Product Dimension ETL\Check for Changes"
               componentClassID="Microsoft.ConditionalSplit"
               contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
-              name="Conditional Split"
+              name="Check for Changes"
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\Product Dimension ETL\Conditional Split.Inputs[Conditional Split Input]"
+                  refId="Package\Product Dimension ETL\Check for Changes.Inputs[Conditional Split Input]"
                   description="Input to the Conditional Split Transformation"
                   name="Conditional Split Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Product Dimension ETL\Conditional Split.Inputs[Conditional Split Input].Columns[Price]"
-                      cachedDataType="decimal"
-                      cachedName="Price"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Price]" />
-                    <inputColumn
-                      refId="Package\Product Dimension ETL\Conditional Split.Inputs[Conditional Split Input].Columns[Copy of Description]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="Copy of Description"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of Description]" />
-                    <inputColumn
-                      refId="Package\Product Dimension ETL\Conditional Split.Inputs[Conditional Split Input].Columns[Copy of Price]"
-                      cachedDataType="decimal"
-                      cachedName="Copy of Price"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of Price]" />
-                    <inputColumn
-                      refId="Package\Product Dimension ETL\Conditional Split.Inputs[Conditional Split Input].Columns[Description]"
+                      refId="Package\Product Dimension ETL\Check for Changes.Inputs[Conditional Split Input].Columns[Description]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="255"
                       cachedName="Description"
-                      lineageId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Description]" />
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Description]" />
+                    <inputColumn
+                      refId="Package\Product Dimension ETL\Check for Changes.Inputs[Conditional Split Input].Columns[Price]"
+                      cachedDataType="r4"
+                      cachedName="Price"
+                      cachedSortKeyPosition="3"
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Price]" />
+                    <inputColumn
+                      refId="Package\Product Dimension ETL\Check for Changes.Inputs[Conditional Split Input].Columns[Description1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Description"
+                      lineageId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[Description]" />
+                    <inputColumn
+                      refId="Package\Product Dimension ETL\Check for Changes.Inputs[Conditional Split Input].Columns[UnitPrice]"
+                      cachedDataType="numeric"
+                      cachedName="UnitPrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[UnitPrice]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Product Dimension ETL\Conditional Split.Outputs[ChangedPrice]"
+                  refId="Package\Product Dimension ETL\Check for Changes.Outputs[No Change]"
                   description="Output 1 of the Conditional Split Transformation"
                   errorOrTruncationOperation="Computation"
                   errorRowDisposition="FailComponent"
                   exclusionGroup="1"
-                  name="ChangedPrice"
-                  synchronousInputId="Package\Product Dimension ETL\Conditional Split.Inputs[Conditional Split Input]"
+                  name="No Change"
+                  synchronousInputId="Package\Product Dimension ETL\Check for Changes.Inputs[Conditional Split Input]"
                   truncationRowDisposition="FailComponent">
                   <properties>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Price]} != #{Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of Price]}</property>
+                      name="Expression">#{Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[Description]} == #{Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Description]} &amp;&amp; #{Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Price]} == #{Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[UnitPrice]}</property>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the friendly version of the expression. This expression version uses column names."
                       expressionType="Notify"
-                      name="FriendlyExpression">Price != [Copy of Price]</property>
+                      name="FriendlyExpression">[Lookup Existing Products].Description == [Sort and Remove Duplicates].Description &amp;&amp; Price == UnitPrice</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
@@ -155,26 +177,26 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Product Dimension ETL\Conditional Split.Outputs[ChangedDescription]"
+                  refId="Package\Product Dimension ETL\Check for Changes.Outputs[Has Change]"
                   description="Output 2 of the Conditional Split Transformation"
                   errorOrTruncationOperation="Computation"
                   errorRowDisposition="FailComponent"
                   exclusionGroup="1"
-                  name="ChangedDescription"
-                  synchronousInputId="Package\Product Dimension ETL\Conditional Split.Inputs[Conditional Split Input]"
+                  name="Has Change"
+                  synchronousInputId="Package\Product Dimension ETL\Check for Changes.Inputs[Conditional Split Input]"
                   truncationRowDisposition="FailComponent">
                   <properties>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of Description]} != #{Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Description]}</property>
+                      name="Expression">#{Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[Description]} != #{Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Description]} &amp;&amp; #{Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Price]} != #{Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[UnitPrice]}</property>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the friendly version of the expression. This expression version uses column names."
                       expressionType="Notify"
-                      name="FriendlyExpression">[Copy of Description] != Lookup.Description</property>
+                      name="FriendlyExpression">[Lookup Existing Products].Description != [Sort and Remove Duplicates].Description &amp;&amp; Price != UnitPrice</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
@@ -183,11 +205,11 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Product Dimension ETL\Conditional Split.Outputs[Unchanged]"
+                  refId="Package\Product Dimension ETL\Check for Changes.Outputs[Ignore]"
                   description="Default Output of the Conditional Split Transformation"
                   exclusionGroup="1"
-                  name="Unchanged"
-                  synchronousInputId="Package\Product Dimension ETL\Conditional Split.Inputs[Conditional Split Input]">
+                  name="Ignore"
+                  synchronousInputId="Package\Product Dimension ETL\Check for Changes.Inputs[Conditional Split Input]">
                   <properties>
                     <property
                       dataType="System.Boolean"
@@ -196,23 +218,23 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Product Dimension ETL\Conditional Split.Outputs[Conditional Split Error Output]"
+                  refId="Package\Product Dimension ETL\Check for Changes.Outputs[Conditional Split Error Output]"
                   description="Error Output of the Conditional Split Transformation"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Conditional Split Error Output"
-                  synchronousInputId="Package\Product Dimension ETL\Conditional Split.Inputs[Conditional Split Input]">
+                  synchronousInputId="Package\Product Dimension ETL\Check for Changes.Inputs[Conditional Split Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      refId="Package\Product Dimension ETL\Check for Changes.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Product Dimension ETL\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Product Dimension ETL\Check for Changes.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      refId="Package\Product Dimension ETL\Check for Changes.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Product Dimension ETL\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Product Dimension ETL\Check for Changes.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -221,226 +243,125 @@
               </outputs>
             </component>
             <component
-              refId="Package\Product Dimension ETL\Data Conversion"
-              componentClassID="Microsoft.DataConvert"
-              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Data Conversion"
-              name="Data Conversion"
-              usesDispositions="true">
+              refId="Package\Product Dimension ETL\Count Error Rows"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Count Error Rows">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorRows</property>
+              </properties>
               <inputs>
                 <input
-                  refId="Package\Product Dimension ETL\Data Conversion.Inputs[Data Conversion Input]"
-                  name="Data Conversion Input">
+                  refId="Package\Product Dimension ETL\Count Error Rows.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Product Dimension ETL\Count Error Rows.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Product Dimension ETL\Count Error Rows.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Product Dimension ETL\Expire Existing Records"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Expire Existing Records"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE Dim_Product
+SET IsCurrent = 0,
+    ExpirationDate = GETDATE()
+WHERE ProductKey = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Product Dimension ETL\Expire Existing Records.Connections[OleDbConnection]"
+                  connectionManagerID="{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[(localdb)_MSSQLLocalDB.DW_11095]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Product Dimension ETL\Expire Existing Records.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Product Dimension ETL\Data Conversion.Inputs[Data Conversion Input].Columns[StockCode]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="StockCode"
-                      lineageId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[StockCode]" />
-                    <inputColumn
-                      refId="Package\Product Dimension ETL\Data Conversion.Inputs[Data Conversion Input].Columns[Description]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="Description"
-                      lineageId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Description]" />
-                    <inputColumn
-                      refId="Package\Product Dimension ETL\Data Conversion.Inputs[Data Conversion Input].Columns[Price]"
-                      cachedDataType="decimal"
-                      cachedName="Price"
-                      lineageId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Price]" />
+                      refId="Package\Product Dimension ETL\Expire Existing Records.Inputs[OLE DB Command Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Product Dimension ETL\Expire Existing Records.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[ProductKey]" />
                   </inputColumns>
-                  <externalMetadataColumns />
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Product Dimension ETL\Expire Existing Records.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="i4"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output]"
+                  refId="Package\Product Dimension ETL\Expire Existing Records.Outputs[OLE DB Command Output]"
                   exclusionGroup="1"
-                  name="Data Conversion Output"
-                  synchronousInputId="Package\Product Dimension ETL\Data Conversion.Inputs[Data Conversion Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of StockCode]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="20"
-                      lineageId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of StockCode]"
-                      name="Copy of StockCode"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[StockCode]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Description]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="50"
-                      lineageId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Description]"
-                      name="Copy of Description"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Description]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Price]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Price]"
-                      name="Copy of Price"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Price]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Product Dimension ETL\Expire Existing Records.Inputs[OLE DB Command Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Error Output]"
+                  refId="Package\Product Dimension ETL\Expire Existing Records.Outputs[OLE DB Command Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
-                  name="Data Conversion Error Output"
-                  synchronousInputId="Package\Product Dimension ETL\Data Conversion.Inputs[Data Conversion Input]">
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Product Dimension ETL\Expire Existing Records.Inputs[OLE DB Command Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      refId="Package\Product Dimension ETL\Expire Existing Records.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Product Dimension ETL\Expire Existing Records.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      refId="Package\Product Dimension ETL\Expire Existing Records.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Product Dimension ETL\Derived Column"
-              componentClassID="Microsoft.DerivedColumn"
-              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-              name="Derived Column"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Product Dimension ETL\Derived Column.Inputs[Derived Column Input]"
-                  description="Input to the Derived Column Transformation"
-                  name="Derived Column Input">
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Output]"
-                  description="Default Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  name="Derived Column Output"
-                  synchronousInputId="Package\Product Dimension ETL\Derived Column.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Output].Columns[EffectiveDate]"
-                      dataType="dbTimeStamp"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Output].Columns[EffectiveDate]"
-                      name="EffectiveDate"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">[GETDATE]()</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">GETDATE()</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Output].Columns[IsCurrent]"
-                      dataType="bool"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Output].Columns[IsCurrent]"
-                      name="IsCurrent"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">(DT_BOOL)1</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">(DT_BOOL)1</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Error Output]"
-                  description="Error Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Derived Column Error Output"
-                  synchronousInputId="Package\Product Dimension ETL\Derived Column.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Product Dimension ETL\Expire Existing Records.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -486,7 +407,7 @@
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="RedirectRow"
                       externalMetadataColumnId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[StockCode]"
-                      length="50"
+                      length="20"
                       lineageId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[StockCode]"
                       name="StockCode"
                       truncationRowDisposition="RedirectRow">
@@ -508,7 +429,7 @@
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="RedirectRow"
                       externalMetadataColumnId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Description]"
-                      length="50"
+                      length="255"
                       lineageId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Description]"
                       name="Description"
                       truncationRowDisposition="RedirectRow">
@@ -525,7 +446,7 @@
                     </outputColumn>
                     <outputColumn
                       refId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Price]"
-                      dataType="decimal"
+                      dataType="r4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="RedirectRow"
                       externalMetadataColumnId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Price]"
@@ -554,13 +475,13 @@
                       refId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[StockCode]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="20"
                       name="StockCode" />
                     <externalMetadataColumn
                       refId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Description]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="255"
                       name="Description" />
                     <externalMetadataColumn
                       refId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Quantity]"
@@ -572,7 +493,7 @@
                       name="InvoiceDate" />
                     <externalMetadataColumn
                       refId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Price]"
-                      dataType="decimal"
+                      dataType="r4"
                       name="Price" />
                     <externalMetadataColumn
                       refId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Customer ID]"
@@ -616,11 +537,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\Product Dimension ETL\Lookup"
+              refId="Package\Product Dimension ETL\Lookup Existing Products"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup"
+              name="Lookup Existing Products"
               usesDispositions="true"
               version="6">
               <properties>
@@ -676,7 +597,7 @@ where [refTable].[StockCode] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of StockCode]};</property>
+                  name="ParameterMap">#{Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[StockCode]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -688,7 +609,7 @@ where [refTable].[StockCode] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Product Dimension ETL\Lookup.Connections[OleDbConnection]"
+                  refId="Package\Product Dimension ETL\Lookup Existing Products.Connections[OleDbConnection]"
                   connectionManagerID="{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}:external"
                   connectionManagerRefId="Project.ConnectionManagers[(localdb)_MSSQLLocalDB.DW_11095]"
                   description="Connection manager used to access lookup data."
@@ -696,17 +617,17 @@ where [refTable].[StockCode] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Product Dimension ETL\Lookup.Inputs[Lookup Input]"
+                  refId="Package\Product Dimension ETL\Lookup Existing Products.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Product Dimension ETL\Lookup.Inputs[Lookup Input].Columns[Copy of StockCode]"
+                      refId="Package\Product Dimension ETL\Lookup Existing Products.Inputs[Lookup Input].Columns[StockCode]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="20"
-                      cachedName="Copy of StockCode"
+                      cachedName="StockCode"
                       cachedSortKeyPosition="1"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of StockCode]">
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[StockCode]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -724,17 +645,17 @@ where [refTable].[StockCode] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output]"
+                  refId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\Product Dimension ETL\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Product Dimension ETL\Lookup Existing Products.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[ProductKey]"
+                      refId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[ProductKey]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[ProductKey]"
+                      lineageId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[ProductKey]"
                       name="ProductKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -745,28 +666,12 @@ where [refTable].[StockCode] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[StockCode]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Copy Column"
-                      length="20"
-                      lineageId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[StockCode]"
-                      name="StockCode"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">StockCode</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Description]"
+                      refId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[Description]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Copy Column"
                       length="255"
-                      lineageId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Description]"
+                      lineageId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[Description]"
                       name="Description"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -777,10 +682,10 @@ where [refTable].[StockCode] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[UnitPrice]"
+                      refId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[UnitPrice]"
                       dataType="numeric"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[UnitPrice]"
+                      lineageId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output].Columns[UnitPrice]"
                       name="UnitPrice"
                       precision="10"
                       scale="2"
@@ -796,132 +701,30 @@ where [refTable].[StockCode] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Product Dimension ETL\Lookup.Outputs[Lookup No Match Output]"
+                  refId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\Product Dimension ETL\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Product Dimension ETL\Lookup Existing Products.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Error Output]"
+                  refId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\Product Dimension ETL\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Product Dimension ETL\Lookup Existing Products.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Product Dimension ETL\OLE DB Command"
-              componentClassID="Microsoft.OLEDBCommand"
-              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
-              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
-              name="OLE DB Command"
-              usesDispositions="true"
-              version="2">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE Dim_Product
-SET IsCurrent = 0, ExpirationDate = GETDATE()
-WHERE StockCode = ? AND IsCurrent = 1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Product Dimension ETL\OLE DB Command.Connections[OleDbConnection]"
-                  connectionManagerID="{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[(localdb)_MSSQLLocalDB.DW_11095]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Product Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input]"
-                  errorOrTruncationOperation="Command Execution"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Command Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Product Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input].Columns[Copy of StockCode]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="Copy of StockCode"
-                      cachedSortKeyPosition="1"
-                      externalMetadataColumnId="Package\Product Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of StockCode]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Product Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="Param_0">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Product Dimension ETL\OLE DB Command.Outputs[OLE DB Command Output]"
-                  exclusionGroup="1"
-                  name="OLE DB Command Output"
-                  synchronousInputId="Package\Product Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Product Dimension ETL\OLE DB Command.Outputs[OLE DB Command Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Command Error Output"
-                  synchronousInputId="Package\Product Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Product Dimension ETL\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Product Dimension ETL\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Product Dimension ETL\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Product Dimension ETL\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1002,40 +805,45 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of StockCode]"
+                      refId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StockCode]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="20"
-                      cachedName="Copy of StockCode"
-                      cachedSortKeyPosition="1"
+                      cachedName="StockCode"
                       externalMetadataColumnId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StockCode]"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of StockCode]" />
+                      lineageId="Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[StockCode]" />
                     <inputColumn
-                      refId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Description]"
+                      refId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Description]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="Copy of Description"
+                      cachedLength="255"
+                      cachedName="Description"
                       externalMetadataColumnId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of Description]" />
+                      lineageId="Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Description]" />
                     <inputColumn
-                      refId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Price]"
-                      cachedDataType="decimal"
-                      cachedName="Copy of Price"
+                      refId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Price]"
+                      cachedDataType="r4"
+                      cachedName="Price"
                       externalMetadataColumnId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of Price]" />
+                      lineageId="Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Price]" />
                     <inputColumn
                       refId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EffectiveDate]"
                       cachedDataType="dbTimeStamp"
                       cachedName="EffectiveDate"
                       externalMetadataColumnId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EffectiveDate]"
-                      lineageId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Output].Columns[EffectiveDate]" />
+                      lineageId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Output].Columns[EffectiveDate]" />
+                    <inputColumn
+                      refId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ExpirationDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ExpirationDate"
+                      externalMetadataColumnId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ExpirationDate]"
+                      lineageId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Output].Columns[ExpirationDate]" />
                     <inputColumn
                       refId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsCurrent]"
                       cachedDataType="bool"
                       cachedName="IsCurrent"
                       externalMetadataColumnId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
-                      lineageId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Output].Columns[IsCurrent]" />
+                      lineageId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Output].Columns[IsCurrent]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1102,11 +910,128 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
               </outputs>
             </component>
             <component
-              refId="Package\Product Dimension ETL\Sort"
+              refId="Package\Product Dimension ETL\Set SCD Columns"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Set SCD Columns"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Product Dimension ETL\Set SCD Columns.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Product Dimension ETL\Set SCD Columns.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Output].Columns[EffectiveDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Output].Columns[EffectiveDate]"
+                      name="EffectiveDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Output].Columns[ExpirationDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Output].Columns[ExpirationDate]"
+                      name="ExpirationDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">NULL(DT_DBTIMESTAMP)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">NULL(DT_DBTIMESTAMP)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      name="IsCurrent"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression"> TRUE </property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression"> TRUE </property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Product Dimension ETL\Set SCD Columns.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Product Dimension ETL\Sort and Remove Duplicates"
               componentClassID="Microsoft.Sort"
               contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
               description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
-              name="Sort"
+              name="Sort and Remove Duplicates"
               version="1">
               <properties>
                 <property
@@ -1117,72 +1042,20 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
                   dataType="System.Int32"
                   description="Specifies the maximum number of threads to use for sorting."
                   expressionType="Notify"
-                  name="MaximumThreads">4</property>
+                  name="MaximumThreads">-1</property>
               </properties>
               <inputs>
                 <input
-                  refId="Package\Product Dimension ETL\Sort.Inputs[Sort Input]"
+                  refId="Package\Product Dimension ETL\Sort and Remove Duplicates.Inputs[Sort Input]"
                   name="Sort Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Product Dimension ETL\Sort.Inputs[Sort Input].Columns[StockCode]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="StockCode"
-                      lineageId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[StockCode]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Product Dimension ETL\Sort.Inputs[Sort Input].Columns[Description]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="Description"
-                      lineageId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Description]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Product Dimension ETL\Sort.Inputs[Sort Input].Columns[Price]"
-                      cachedDataType="decimal"
-                      cachedName="Price"
-                      lineageId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Price]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Product Dimension ETL\Sort.Inputs[Sort Input].Columns[Copy of StockCode]"
+                      refId="Package\Product Dimension ETL\Sort and Remove Duplicates.Inputs[Sort Input].Columns[StockCode]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="20"
-                      cachedName="Copy of StockCode"
-                      lineageId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of StockCode]">
+                      cachedName="StockCode"
+                      lineageId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[StockCode]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1195,12 +1068,12 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Product Dimension ETL\Sort.Inputs[Sort Input].Columns[Copy of Description]"
+                      refId="Package\Product Dimension ETL\Sort and Remove Duplicates.Inputs[Sort Input].Columns[Description]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="Copy of Description"
-                      lineageId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Description]">
+                      cachedLength="255"
+                      cachedName="Description"
+                      lineageId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Description]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1209,14 +1082,14 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
                         <property
                           dataType="System.Int32"
                           description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
+                          name="NewSortKeyPosition">2</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Product Dimension ETL\Sort.Inputs[Sort Input].Columns[Copy of Price]"
-                      cachedDataType="decimal"
-                      cachedName="Copy of Price"
-                      lineageId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Price]">
+                      refId="Package\Product Dimension ETL\Sort and Remove Duplicates.Inputs[Sort Input].Columns[Price]"
+                      cachedDataType="r4"
+                      cachedName="Price"
+                      lineageId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Price]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1225,7 +1098,7 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
                         <property
                           dataType="System.Int32"
                           description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
+                          name="NewSortKeyPosition">3</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
@@ -1234,17 +1107,18 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Product Dimension ETL\Sort.Outputs[Sort Output]"
+                  refId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output]"
                   isSorted="true"
                   name="Sort Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[StockCode]"
+                      refId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[StockCode]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[StockCode]"
-                      name="StockCode">
+                      length="20"
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[StockCode]"
+                      name="StockCode"
+                      sortKeyPosition="1">
                       <properties>
                         <property
                           containsID="true"
@@ -1254,12 +1128,13 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Description]"
+                      refId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Description]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Description]"
-                      name="Description">
+                      length="255"
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Description]"
+                      name="Description"
+                      sortKeyPosition="2">
                       <properties>
                         <property
                           containsID="true"
@@ -1269,10 +1144,11 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Price]"
-                      dataType="decimal"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Price]"
-                      name="Price">
+                      refId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Price]"
+                      dataType="r4"
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Price]"
+                      name="Price"
+                      sortKeyPosition="3">
                       <properties>
                         <property
                           containsID="true"
@@ -1281,50 +1157,158 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
                           name="SortColumnId">#{Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Price]}</property>
                       </properties>
                     </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Product Dimension ETL\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Product Dimension ETL\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Product Dimension ETL\Union All.Inputs[Union All Input 1].Columns[StockCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="StockCode"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[StockCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[StockCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Product Dimension ETL\Union All.Inputs[Union All Input 1].Columns[Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Description"
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Description]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Description]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Product Dimension ETL\Union All.Inputs[Union All Input 1].Columns[Price]"
+                      cachedDataType="r4"
+                      cachedName="Price"
+                      cachedSortKeyPosition="3"
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Price]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Price]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Product Dimension ETL\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Product Dimension ETL\Union All.Inputs[Union All Input 2].Columns[StockCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="StockCode"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[StockCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[StockCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Product Dimension ETL\Union All.Inputs[Union All Input 2].Columns[Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Description"
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Description]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Description]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Product Dimension ETL\Union All.Inputs[Union All Input 2].Columns[Price]"
+                      cachedDataType="r4"
+                      cachedName="Price"
+                      cachedSortKeyPosition="3"
+                      lineageId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output].Columns[Price]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Price]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Product Dimension ETL\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Product Dimension ETL\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of StockCode]"
+                      refId="Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[StockCode]"
                       codePage="1252"
                       dataType="str"
                       length="20"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of StockCode]"
-                      name="Copy of StockCode"
-                      sortKeyPosition="1">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of StockCode]}</property>
-                      </properties>
-                    </outputColumn>
+                      lineageId="Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[StockCode]"
+                      name="StockCode" />
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of Description]"
+                      refId="Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Description]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of Description]"
-                      name="Copy of Description">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Description]}</property>
-                      </properties>
-                    </outputColumn>
+                      length="255"
+                      lineageId="Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Description]"
+                      name="Description" />
                     <outputColumn
-                      refId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of Price]"
-                      dataType="decimal"
-                      lineageId="Package\Product Dimension ETL\Sort.Outputs[Sort Output].Columns[Copy of Price]"
-                      name="Copy of Price">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Price]}</property>
-                      </properties>
-                    </outputColumn>
+                      refId="Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Price]"
+                      dataType="r4"
+                      lineageId="Package\Product Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Price]"
+                      name="Price" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -1333,40 +1317,50 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
           </components>
           <paths>
             <path
-              refId="Package\Product Dimension ETL.Paths[Data Conversion Output]"
-              endId="Package\Product Dimension ETL\Sort.Inputs[Sort Input]"
-              name="Data Conversion Output"
-              startId="Package\Product Dimension ETL\Data Conversion.Outputs[Data Conversion Output]" />
-            <path
               refId="Package\Product Dimension ETL.Paths[Derived Column Output]"
               endId="Package\Product Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input]"
               name="Derived Column Output"
-              startId="Package\Product Dimension ETL\Derived Column.Outputs[Derived Column Output]" />
+              startId="Package\Product Dimension ETL\Set SCD Columns.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Product Dimension ETL.Paths[Flat File Source Error Output]"
+              endId="Package\Product Dimension ETL\Count Error Rows.Inputs[Row Count Input 1]"
+              name="Flat File Source Error Output"
+              startId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Error Output]" />
             <path
               refId="Package\Product Dimension ETL.Paths[Flat File Source Output]"
-              endId="Package\Product Dimension ETL\Data Conversion.Inputs[Data Conversion Input]"
+              endId="Package\Product Dimension ETL\Sort and Remove Duplicates.Inputs[Sort Input]"
               name="Flat File Source Output"
               startId="Package\Product Dimension ETL\Flat File Source.Outputs[Flat File Source Output]" />
             <path
+              refId="Package\Product Dimension ETL.Paths[Has Change]"
+              endId="Package\Product Dimension ETL\Expire Existing Records.Inputs[OLE DB Command Input]"
+              name="Has Change"
+              startId="Package\Product Dimension ETL\Check for Changes.Outputs[Has Change]" />
+            <path
               refId="Package\Product Dimension ETL.Paths[Lookup Match Output]"
-              endId="Package\Product Dimension ETL\Conditional Split.Inputs[Conditional Split Input]"
+              endId="Package\Product Dimension ETL\Check for Changes.Inputs[Conditional Split Input]"
               name="Lookup Match Output"
-              startId="Package\Product Dimension ETL\Lookup.Outputs[Lookup Match Output]" />
+              startId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Product Dimension ETL.Paths[Lookup No Match Output]"
+              endId="Package\Product Dimension ETL\Union All.Inputs[Union All Input 1]"
+              name="Lookup No Match Output"
+              startId="Package\Product Dimension ETL\Lookup Existing Products.Outputs[Lookup No Match Output]" />
             <path
               refId="Package\Product Dimension ETL.Paths[OLE DB Command Output]"
-              endId="Package\Product Dimension ETL\Derived Column.Inputs[Derived Column Input]"
+              endId="Package\Product Dimension ETL\Union All.Inputs[Union All Input 2]"
               name="OLE DB Command Output"
-              startId="Package\Product Dimension ETL\OLE DB Command.Outputs[OLE DB Command Output]" />
+              startId="Package\Product Dimension ETL\Expire Existing Records.Outputs[OLE DB Command Output]" />
             <path
               refId="Package\Product Dimension ETL.Paths[Sort Output]"
-              endId="Package\Product Dimension ETL\Lookup.Inputs[Lookup Input]"
+              endId="Package\Product Dimension ETL\Lookup Existing Products.Inputs[Lookup Input]"
               name="Sort Output"
-              startId="Package\Product Dimension ETL\Sort.Outputs[Sort Output]" />
+              startId="Package\Product Dimension ETL\Sort and Remove Duplicates.Outputs[Sort Output]" />
             <path
-              refId="Package\Product Dimension ETL.Paths[Unchanged]"
-              endId="Package\Product Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input]"
-              name="Unchanged"
-              startId="Package\Product Dimension ETL\Conditional Split.Outputs[Unchanged]" />
+              refId="Package\Product Dimension ETL.Paths[Union All Output 1]"
+              endId="Package\Product Dimension ETL\Set SCD Columns.Inputs[Derived Column Input]"
+              name="Union All Output 1"
+              startId="Package\Product Dimension ETL\Union All.Outputs[Union All Output 1]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1422,6 +1416,46 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
       DTS:ObjectName="Constraint 2"
       DTS:To="Package\Log ETL Completion" />
   </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{3AE63E88-A9EA-4482-9A30-D09D93C21F36}"
+      DTS:EventID="0"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{0A1CE362-02CB-4D21-A1DA-2BC33F14C501}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Log ETL Failure"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{A9F4968B-C10B-458E-BB9F-F7DB5CD5B63E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Log ETL Failure"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9B4AC5C7-3FEE-4230-B38A-0901D287F03C}"
+              SQLTask:SqlStatementSource="UPDATE ETL_Log&#xA;SET EndTime = GETDATE(),&#xA;    Status = 'Failed'&#xA;WHERE PackageName = 'DimProduct_Load.dtsx'&#xA;  AND TaskName = 'Load Dim Product'&#xA;  AND EndTime IS NULL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -1547,191 +1581,237 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
     design-time-name="Package\Product Dimension ETL">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Product Dimension ETL\OLE DB Destination"
-          TopLeft="427.777754405031,196.444443078394" />
-        <NodeLayout
-          Size="97.6,41.6"
-          Id="Package\Product Dimension ETL\Sort"
-          TopLeft="138.333325775134,187.199998698235" />
-        <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\Product Dimension ETL\Lookup"
-          TopLeft="139.999992350738,278.199998065432" />
-        <NodeLayout
-          Size="167.2,41.6"
-          Id="Package\Product Dimension ETL\OLE DB Command"
-          TopLeft="204.999988799294,447.199996890227" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Product Dimension ETL\Derived Column"
-          TopLeft="436.666642808253,350.06666423791" />
-        <NodeLayout
-          Size="156,41.6"
-          Id="Package\Product Dimension ETL\Data Conversion"
-          TopLeft="133.333326048322,110.066665901277" />
-        <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Product Dimension ETL\Conditional Split"
-          TopLeft="169.166657423808,368.333330771989" />
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="151.2,41.6"
           Id="Package\Product Dimension ETL\Flat File Source"
-          TopLeft="110.833327277667,28.5999998011192" />
+          TopLeft="105.833327550855,40.7333330500788" />
+        <NodeLayout
+          Size="160.8,41.6"
+          Id="Package\Product Dimension ETL\Count Error Rows"
+          TopLeft="339.99998142322,42.4666663713588" />
         <EdgeLayout
-          Id="Package\Product Dimension ETL.Paths[Derived Column Output]"
-          TopLeft="513.222198606642,350.06666423791">
+          Id="Package\Product Dimension ETL.Paths[Flat File Source Error Output]"
+          TopLeft="257.033327550855,62.3999997107188">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,-112.022221159516"
+              EndConnector="82.9666538723649,0"
               Start="0,0"
-              End="0,-104.522221159516">
+              End="75.4666538723649,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-104.522221159516" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Product Dimension ETL.Paths[Data Conversion Output]"
-          TopLeft="211.333326048322,151.666665901277">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-24.2000002731879,35.5333327969578"
-              Start="0,0"
-              End="-24.2000002731879,28.0333327969578">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,13.7666663984789" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,13.7666663984789"
-                    Point2="0,17.7666663984789"
-                    Point3="-4,17.7666663984789" />
-                  <mssgle:LineSegment
-                    End="-20.2000002731879,17.7666663984789" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-20.2000002731879,17.7666663984789"
-                    Point2="-24.2000002731879,17.7666663984789"
-                    Point3="-24.2000002731879,21.7666663984789" />
-                  <mssgle:LineSegment
-                    End="-24.2000002731879,28.0333327969578" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Product Dimension ETL.Paths[Unchanged]"
-          TopLeft="245.966657423808,409.933330771989">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="42.6333313754865,37.2666661182377"
-              Start="0,0"
-              End="42.6333313754865,29.7666661182377">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,14.6333330591188" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,14.6333330591188"
-                    Point2="0,18.6333330591188"
-                    Point3="4,18.6333330591188" />
-                  <mssgle:LineSegment
-                    End="38.6333313754865,18.6333330591188" />
-                  <mssgle:CubicBezierSegment
-                    Point1="38.6333313754865,18.6333330591188"
-                    Point2="42.6333313754865,18.6333330591188"
-                    Point3="42.6333313754865,22.6333330591188" />
-                  <mssgle:LineSegment
-                    End="42.6333313754865,29.7666661182377" />
+                    End="75.4666538723649,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-3.76526790600676,23.6333330591188,50.1638671875,11.6630859375"
+              BoundingBox="-25.8930597825676,5,127.2527734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="210.4,41.6"
+          Id="Package\Product Dimension ETL\Sort and Remove Duplicates"
+          TopLeft="79.1666623411909,123.933332471516" />
         <EdgeLayout
-          Id="Package\Product Dimension ETL.Paths[Sort Output]"
-          TopLeft="187.133325775134,228.799998698235">
+          Id="Package\Product Dimension ETL.Paths[Flat File Source Output]"
+          TopLeft="182.899994946023,82.3333330500788">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="9.26666657560395,49.3999993671974"
+              EndConnector="0,41.5999994214376"
               Start="0,0"
-              End="9.26666657560395,41.8999993671974">
+              End="0,34.0999994214376">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.6999996835987" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.6999996835987"
-                    Point2="0,24.6999996835987"
-                    Point3="4,24.6999996835987" />
-                  <mssgle:LineSegment
-                    End="5.26666657560395,24.6999996835987" />
-                  <mssgle:CubicBezierSegment
-                    Point1="5.26666657560395,24.6999996835987"
-                    Point2="9.26666657560395,24.6999996835987"
-                    Point3="9.26666657560395,28.6999996835987" />
-                  <mssgle:LineSegment
-                    End="9.26666657560395,41.8999993671974" />
+                    End="0,34.0999994214376" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="196,41.6"
+          Id="Package\Product Dimension ETL\Lookup Existing Products"
+          TopLeft="84.9999953558049,216.666665159994" />
+        <EdgeLayout
+          Id="Package\Product Dimension ETL.Paths[Sort Output]"
+          TopLeft="183.683328848498,165.533332471516">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.1333326884773"
+              Start="0,0"
+              End="0,43.6333326884773">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.6333326884773" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Product Dimension ETL\Check for Changes"
+          TopLeft="88.333328507013,306.799997866551" />
+        <EdgeLayout
+          Id="Package\Product Dimension ETL.Paths[Lookup Match Output]"
+          TopLeft="182.999995355805,258.266665159994">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11.066666848792,48.5333327065573"
+              Start="0,0"
+              End="-11.066666848792,41.0333327065573">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2666663532787" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2666663532787"
+                    Point2="0,24.2666663532787"
+                    Point3="-4,24.2666663532787" />
+                  <mssgle:LineSegment
+                    End="-7.06666684879198,24.2666663532787" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.06666684879198,24.2666663532787"
+                    Point2="-11.066666848792,24.2666663532787"
+                    Point3="-11.066666848792,28.2666663532787" />
+                  <mssgle:LineSegment
+                    End="-11.066666848792,41.0333327065573" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-53.724720143146,29.2666663532787,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\Product Dimension ETL\Expire Existing Records"
+          TopLeft="85.833328643607,389.999997287989" />
+        <EdgeLayout
+          Id="Package\Product Dimension ETL.Paths[Has Change]"
+          TopLeft="171.933328507013,348.399997866551">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.30000013659404,41.5999994214375"
+              Start="0,0"
+              End="8.30000013659404,34.0999994214375">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.7999997107188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.7999997107188"
+                    Point2="0,20.7999997107188"
+                    Point3="4,20.7999997107188" />
+                  <mssgle:LineSegment
+                    End="4.30000013659404,20.7999997107188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.30000013659404,20.7999997107188"
+                    Point2="8.30000013659404,20.7999997107188"
+                    Point3="8.30000013659404,24.7999997107188" />
+                  <mssgle:LineSegment
+                    End="8.30000013659404,34.0999994214375" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-22.751347587953,25.7999997107188,53.8026953125,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\Product Dimension ETL\Union All"
+          TopLeft="326.666648818388,316.333331133591" />
+        <EdgeLayout
+          Id="Package\Product Dimension ETL.Paths[Lookup No Match Output]"
+          TopLeft="214.333328689138,258.266665159994">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="172.333320129249,58.066665973597"
+              Start="0,0"
+              End="172.333320129249,50.566665973597">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5087716492296" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5087716492296"
+                    Point2="0,23.5087716492296"
+                    Point3="4,23.5087716492296" />
+                  <mssgle:LineSegment
+                    End="168.333320129249,23.5087716492296" />
+                  <mssgle:CubicBezierSegment
+                    Point1="168.333320129249,23.5087716492296"
+                    Point2="172.333320129249,23.5087716492296"
+                    Point3="172.333320129249,27.5087716492296" />
+                  <mssgle:LineSegment
+                    End="172.333320129249,50.566665973597" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="30.3602733458747,28.5087716492296,111.6127734375,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Product Dimension ETL.Paths[OLE DB Command Output]"
-          TopLeft="315.133322132628,447.199996890227">
+          TopLeft="210.36666197694,389.999997287989">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="197.933320675625,-55.5333326523171"
+              EndConnector="176.299986841447,-32.0666661543978"
               Start="0,0"
-              End="197.933320675625,-48.0333326523171">
+              End="176.299986841447,-24.5666661543978">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-18.52916244094" />
+                    End="0,-8.98834713144516" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,-18.52916244094"
-                    Point2="0,-22.52916244094"
-                    Point3="4,-22.52916244094" />
+                    Point1="0,-8.98834713144516"
+                    Point2="0,-12.9883471314452"
+                    Point3="4,-12.9883471314452" />
                   <mssgle:LineSegment
-                    End="193.933320675625,-22.52916244094" />
+                    End="172.299986841447,-12.9883471314452" />
                   <mssgle:CubicBezierSegment
-                    Point1="193.933320675625,-22.52916244094"
-                    Point2="197.933320675625,-22.52916244094"
-                    Point3="197.933320675625,-26.52916244094" />
+                    Point1="172.299986841447,-12.9883471314452"
+                    Point2="176.299986841447,-12.9883471314452"
+                    Point3="176.299986841447,-16.9883471314452" />
                   <mssgle:LineSegment
-                    End="197.933320675625,-48.0333326523171" />
+                    End="176.299986841447,-24.5666661543978" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1740,56 +1820,50 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Product Dimension ETL\Set SCD Columns"
+          TopLeft="479.999973773958,315.466664472951" />
         <EdgeLayout
-          Id="Package\Product Dimension ETL.Paths[Lookup Match Output]"
-          TopLeft="198.035178003884,319.799998065432">
+          Id="Package\Product Dimension ETL.Paths[Union All Output 1]"
+          TopLeft="446.666648818388,336.699997803271">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,48.5333327065574"
+              EndConnector="33.3333249555699,0"
               Start="0,0"
-              End="0,41.0333327065574">
+              End="25.8333249555699,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,41.0333327065574" />
+                    End="25.8333249555699,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,14.7119788532787,96.3827734375,11.609375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Product Dimension ETL\OLE DB Destination"
+          TopLeft="481.666640349561,197.599998625914" />
         <EdgeLayout
-          Id="Package\Product Dimension ETL.Paths[Flat File Source Output]"
-          TopLeft="186.433327277667,70.1999998011192">
+          Id="Package\Product Dimension ETL.Paths[Derived Column Output]"
+          TopLeft="564.23330706176,315.466664472951">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="24.899998770655,39.8666661001578"
+              EndConnector="0,-76.2666658470366"
               Start="0,0"
-              End="24.899998770655,32.3666661001578">
+              End="0,-68.7666658470366">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.9333330500789" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,15.9333330500789"
-                    Point2="0,19.9333330500789"
-                    Point3="4,19.9333330500789" />
-                  <mssgle:LineSegment
-                    End="20.899998770655,19.9333330500789" />
-                  <mssgle:CubicBezierSegment
-                    Point1="20.899998770655,19.9333330500789"
-                    Point2="24.899998770655,19.9333330500789"
-                    Point3="24.899998770655,23.9333330500789" />
-                  <mssgle:LineSegment
-                    End="24.899998770655,32.3666661001578" />
+                    End="0,-68.7666658470366" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1801,6 +1875,41 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package.EventHandlers[OnError]\Log ETL Failure"
+          TopLeft="173.999997407198,85.9999987185002" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Product Dimension ETL\Lookup Existing Products">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Product Dimension ETL\OLE DB Destination">
     <Properties>
@@ -1811,29 +1920,6 @@ WHERE StockCode = ? AND IsCurrent = 1</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Product Dimension ETL\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

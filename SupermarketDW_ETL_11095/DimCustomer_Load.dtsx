@@ -11,11 +11,20 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{14BE228B-CCA0-4C1B-A9F4-337B10049405}">
+  DTS:VersionBuild="26"
+  DTS:VersionGUID="{5BC72E4C-8D91-49DE-A5F2-F9FF5C3D5DC7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D454039F-8369-44AB-869E-DA5DE56F4F0F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorRows">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{5316CBD5-5CFB-457C-BE92-AFB3146D3E72}"
@@ -55,19 +64,19 @@
                   name="Conditional Split Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Customer Dimension ETL\Conditional Split.Inputs[Conditional Split Input].Columns[Country_Conv]"
+                      refId="Package\Customer Dimension ETL\Conditional Split.Inputs[Conditional Split Input].Columns[Country]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
-                      cachedName="Country_Conv"
-                      lineageId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Country_Conv]" />
+                      cachedName="Country"
+                      lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Country]" />
                     <inputColumn
-                      refId="Package\Customer Dimension ETL\Conditional Split.Inputs[Conditional Split Input].Columns[Country_Ref]"
+                      refId="Package\Customer Dimension ETL\Conditional Split.Inputs[Conditional Split Input].Columns[Country1]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
-                      cachedName="Country_Ref"
-                      lineageId="Package\Customer Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Country_Ref]" />
+                      cachedName="Country"
+                      lineageId="Package\Customer Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Country]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -87,13 +96,13 @@
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Country_Conv]} != #{Package\Customer Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Country_Ref]}</property>
+                      name="Expression">#{Package\Customer Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Country]} != #{Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Country]}</property>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the friendly version of the expression. This expression version uses column names."
                       expressionType="Notify"
-                      name="FriendlyExpression">Country_Conv != Country_Ref</property>
+                      name="FriendlyExpression">Lookup.Country != [Flat File Source].Country</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
@@ -132,110 +141,6 @@
                       refId="Package\Customer Dimension ETL\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Customer Dimension ETL\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Customer Dimension ETL\Data Conversion"
-              componentClassID="Microsoft.DataConvert"
-              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Data Conversion"
-              name="Data Conversion"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Customer Dimension ETL\Data Conversion.Inputs[Data Conversion Input]"
-                  name="Data Conversion Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Customer Dimension ETL\Data Conversion.Inputs[Data Conversion Input].Columns[Customer ID]"
-                      cachedDataType="i4"
-                      cachedName="Customer ID"
-                      lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Customer ID]" />
-                    <inputColumn
-                      refId="Package\Customer Dimension ETL\Data Conversion.Inputs[Data Conversion Input].Columns[Country]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="Country"
-                      lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Country]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output]"
-                  exclusionGroup="1"
-                  name="Data Conversion Output"
-                  synchronousInputId="Package\Customer Dimension ETL\Data Conversion.Inputs[Data Conversion Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID_Conv]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID_Conv]"
-                      name="CustomerID_Conv"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Customer ID]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Country_Conv]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="50"
-                      lineageId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Country_Conv]"
-                      name="Country_Conv"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Country]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Data Conversion Error Output"
-                  synchronousInputId="Package\Customer Dimension ETL\Data Conversion.Inputs[Data Conversion Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -301,13 +206,13 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(DT_BOOL)1</property>
+                          name="Expression"> TRUE </property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">(DT_BOOL)1</property>
+                          name="FriendlyExpression"> TRUE </property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -331,6 +236,101 @@
                       refId="Package\Customer Dimension ETL\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Customer Dimension ETL\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Customer Dimension ETL\Derived Column 1"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Customer Dimension ETL\Derived Column 1.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Customer Dimension ETL\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Output].Columns[EffectiveDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Output].Columns[EffectiveDate]"
+                      name="EffectiveDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      name="IsCurrent"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression"> TRUE </property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression"> TRUE </property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Customer Dimension ETL\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -373,11 +373,11 @@
                       refId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Customer ID]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="IgnoreFailure"
+                      errorRowDisposition="RedirectRow"
                       externalMetadataColumnId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Customer ID]"
                       lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Customer ID]"
                       name="Customer ID"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="RedirectRow">
                       <properties>
                         <property
                           dataType="System.Boolean"
@@ -394,12 +394,12 @@
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="IgnoreFailure"
+                      errorRowDisposition="RedirectRow"
                       externalMetadataColumnId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Country]"
                       length="50"
                       lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Country]"
                       name="Country"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="RedirectRow">
                       <properties>
                         <property
                           dataType="System.Boolean"
@@ -422,13 +422,13 @@
                       refId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[StockCode]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="20"
                       name="StockCode" />
                     <externalMetadataColumn
                       refId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Description]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="255"
                       name="Description" />
                     <externalMetadataColumn
                       refId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Quantity]"
@@ -440,7 +440,7 @@
                       name="InvoiceDate" />
                     <externalMetadataColumn
                       refId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Price]"
-                      dataType="decimal"
+                      dataType="r4"
                       name="Price" />
                     <externalMetadataColumn
                       refId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Customer ID]"
@@ -498,7 +498,7 @@
                   expressionType="Notify"
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT CustomerKey, CustomerID, Country 
-FROM Dim_Customer
+FROM Dim_Customer 
 WHERE IsCurrent = 1</property>
                 <property
                   dataType="System.String"
@@ -506,7 +506,7 @@ WHERE IsCurrent = 1</property>
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT CustomerKey, CustomerID, Country 
-FROM Dim_Customer
+FROM Dim_Customer 
 WHERE IsCurrent = 1) [refTable]
 where [refTable].[CustomerID] = ?</property>
                 <property
@@ -544,7 +544,7 @@ where [refTable].[CustomerID] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID_Conv]};</property>
+                  name="ParameterMap">#{Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Customer ID]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -568,10 +568,10 @@ where [refTable].[CustomerID] = ?</property>
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Customer Dimension ETL\Lookup.Inputs[Lookup Input].Columns[CustomerID_Conv]"
+                      refId="Package\Customer Dimension ETL\Lookup.Inputs[Lookup Input].Columns[Customer ID]"
                       cachedDataType="i4"
-                      cachedName="CustomerID_Conv"
-                      lineageId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID_Conv]">
+                      cachedName="Customer ID"
+                      lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Customer ID]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -596,14 +596,28 @@ where [refTable].[CustomerID] = ?</property>
                   synchronousInputId="Package\Customer Dimension ETL\Lookup.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Customer Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Country_Ref]"
+                      refId="Package\Customer Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Customer Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      name="CustomerKey"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CustomerKey</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Customer Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Country]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Copy Column"
                       length="50"
-                      lineageId="Package\Customer Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Country_Ref]"
-                      name="Country_Ref"
-                      truncationRowDisposition="FailComponent">
+                      lineageId="Package\Customer Dimension ETL\Lookup.Outputs[Lookup Match Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           dataType="System.String"
@@ -689,11 +703,11 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
                   name="OLE DB Command Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Customer Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input].Columns[CustomerID_Conv]"
+                      refId="Package\Customer Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input].Columns[Customer ID]"
                       cachedDataType="i4"
-                      cachedName="CustomerID_Conv"
+                      cachedName="Customer ID"
                       externalMetadataColumnId="Package\Customer Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID_Conv]" />
+                      lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Customer ID]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -811,36 +825,36 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
                 <input
                   refId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
-                  errorRowDisposition="RedirectRow"
+                  errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerID_Conv]"
+                      refId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Customer ID]"
                       cachedDataType="i4"
-                      cachedName="CustomerID_Conv"
+                      cachedName="Customer ID"
                       externalMetadataColumnId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
-                      lineageId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID_Conv]" />
+                      lineageId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Customer ID]" />
                     <inputColumn
-                      refId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Country_Conv]"
+                      refId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Country]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
-                      cachedName="Country_Conv"
+                      cachedName="Country"
                       externalMetadataColumnId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
-                      lineageId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output].Columns[Country_Conv]" />
+                      lineageId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Country]" />
                     <inputColumn
                       refId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EffectiveDate]"
                       cachedDataType="dbTimeStamp"
                       cachedName="EffectiveDate"
                       externalMetadataColumnId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EffectiveDate]"
-                      lineageId="Package\Customer Dimension ETL\Derived Column.Outputs[Derived Column Output].Columns[EffectiveDate]" />
+                      lineageId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[EffectiveDate]" />
                     <inputColumn
                       refId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsCurrent]"
                       cachedDataType="bool"
                       cachedName="IsCurrent"
                       externalMetadataColumnId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
-                      lineageId="Package\Customer Dimension ETL\Derived Column.Outputs[Derived Column Output].Columns[IsCurrent]" />
+                      lineageId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[IsCurrent]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -898,6 +912,206 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Customer Dimension ETL\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorRows</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Customer Dimension ETL\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Customer Dimension ETL\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Customer Dimension ETL\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Customer Dimension ETL\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 1].Columns[Customer ID]"
+                      cachedDataType="i4"
+                      cachedName="Customer ID"
+                      lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Customer ID]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Customer ID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 1].Columns[Country]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Country"
+                      lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Country]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Country]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 1].Columns[EffectiveDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EffectiveDate"
+                      lineageId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Output].Columns[EffectiveDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[EffectiveDate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 1].Columns[IsCurrent]"
+                      cachedDataType="bool"
+                      cachedName="IsCurrent"
+                      lineageId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Output].Columns[IsCurrent]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[IsCurrent]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 2].Columns[Customer ID]"
+                      cachedDataType="i4"
+                      cachedName="Customer ID"
+                      lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Customer ID]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Customer ID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 2].Columns[Country]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Country"
+                      lineageId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output].Columns[Country]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Country]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 2].Columns[EffectiveDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EffectiveDate"
+                      lineageId="Package\Customer Dimension ETL\Derived Column.Outputs[Derived Column Output].Columns[EffectiveDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[EffectiveDate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 2].Columns[IsCurrent]"
+                      cachedDataType="bool"
+                      cachedName="IsCurrent"
+                      lineageId="Package\Customer Dimension ETL\Derived Column.Outputs[Derived Column Output].Columns[IsCurrent]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[IsCurrent]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Customer ID]"
+                      dataType="i4"
+                      lineageId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Customer ID]"
+                      name="Customer ID" />
+                    <outputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[EffectiveDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[EffectiveDate]"
+                      name="EffectiveDate" />
+                    <outputColumn
+                      refId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[IsCurrent]"
+                      dataType="bool"
+                      lineageId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1].Columns[IsCurrent]"
+                      name="IsCurrent" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
             <path
@@ -906,18 +1120,23 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
               name="Changed"
               startId="Package\Customer Dimension ETL\Conditional Split.Outputs[Changed]" />
             <path
-              refId="Package\Customer Dimension ETL.Paths[Data Conversion Output]"
-              endId="Package\Customer Dimension ETL\Lookup.Inputs[Lookup Input]"
-              name="Data Conversion Output"
-              startId="Package\Customer Dimension ETL\Data Conversion.Outputs[Data Conversion Output]" />
-            <path
               refId="Package\Customer Dimension ETL.Paths[Derived Column Output]"
-              endId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              endId="Package\Customer Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input]"
               name="Derived Column Output"
               startId="Package\Customer Dimension ETL\Derived Column.Outputs[Derived Column Output]" />
             <path
+              refId="Package\Customer Dimension ETL.Paths[Derived Column Output1]"
+              endId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 1]"
+              name="Derived Column Output"
+              startId="Package\Customer Dimension ETL\Derived Column 1.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Customer Dimension ETL.Paths[Flat File Source Error Output]"
+              endId="Package\Customer Dimension ETL\Row Count.Inputs[Row Count Input 1]"
+              name="Flat File Source Error Output"
+              startId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Error Output]" />
+            <path
               refId="Package\Customer Dimension ETL.Paths[Flat File Source Output]"
-              endId="Package\Customer Dimension ETL\Data Conversion.Inputs[Data Conversion Input]"
+              endId="Package\Customer Dimension ETL\Lookup.Inputs[Lookup Input]"
               name="Flat File Source Output"
               startId="Package\Customer Dimension ETL\Flat File Source.Outputs[Flat File Source Output]" />
             <path
@@ -926,10 +1145,20 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
               name="Lookup Match Output"
               startId="Package\Customer Dimension ETL\Lookup.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Customer Dimension ETL.Paths[OLE DB Destination Error Output]"
-              endId="Package\Customer Dimension ETL\OLE DB Command.Inputs[OLE DB Command Input]"
-              name="OLE DB Destination Error Output"
-              startId="Package\Customer Dimension ETL\OLE DB Destination.Outputs[OLE DB Destination Error Output]" />
+              refId="Package\Customer Dimension ETL.Paths[Lookup No Match Output]"
+              endId="Package\Customer Dimension ETL\Derived Column 1.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\Customer Dimension ETL\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Customer Dimension ETL.Paths[OLE DB Command Output]"
+              endId="Package\Customer Dimension ETL\Union All.Inputs[Union All Input 2]"
+              name="OLE DB Command Output"
+              startId="Package\Customer Dimension ETL\OLE DB Command.Outputs[OLE DB Command Output]" />
+            <path
+              refId="Package\Customer Dimension ETL.Paths[Union All Output 1]"
+              endId="Package\Customer Dimension ETL\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Union All Output 1"
+              startId="Package\Customer Dimension ETL\Union All.Outputs[Union All Output 1]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1163,133 +1392,261 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
     design-time-name="Package\Customer Dimension ETL">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="156,41.6"
-          Id="Package\Customer Dimension ETL\Data Conversion"
-          TopLeft="55.8333302827346,144.733332326876" />
-        <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\Customer Dimension ETL\Lookup"
-          TopLeft="104.999994263053,248.733331603673" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Customer Dimension ETL\Derived Column"
-          TopLeft="113.333327141073,429.866663677428" />
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="151.2,41.6"
           Id="Package\Customer Dimension ETL\Flat File Source"
-          TopLeft="34.9999980876844,44.1999996926387" />
+          TopLeft="104.259253562785,33.799999764959" />
         <NodeLayout
-          Size="167.2,41.6"
-          Id="Package\Customer Dimension ETL\OLE DB Command"
-          TopLeft="437.499976096055,259.133331531352" />
+          Size="112.8,41.6"
+          Id="Package\Customer Dimension ETL\Lookup"
+          TopLeft="123.14814141963,109.777777014397" />
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Flat File Source Output]"
+          TopLeft="179.703697491207,75.399999764959">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.3777772494378"
+              Start="0,0"
+              End="0,26.8777772494378">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.8777772494378" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <NodeLayout
           Size="153.6,41.6"
           Id="Package\Customer Dimension ETL\Conditional Split"
-          TopLeft="115.833327004479,336.26666432831" />
+          TopLeft="98.14814278557,187.777776471995" />
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Lookup Match Output]"
+          TopLeft="177.2481421026,151.377777014397">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.3999994575977"
+              Start="0,0"
+              End="0,28.8999994575977">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.8999994575977" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,8.64531222879887,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Customer Dimension ETL\Derived Column"
+          TopLeft="79.6296252788587,282.148146186125" />
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Changed]"
+          TopLeft="174.94814278557,229.377776471995">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-18.9185175067113,52.7703697141306"
+              Start="0,0"
+              End="-18.9185175067113,45.2703697141306">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.3851848570653" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.3851848570653"
+                    Point2="0,26.3851848570653"
+                    Point3="-4,26.3851848570653" />
+                  <mssgle:LineSegment
+                    End="-14.9185175067113,26.3851848570653" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-14.9185175067113,26.3851848570653"
+                    Point2="-18.9185175067113,26.3851848570653"
+                    Point3="-18.9185175067113,30.3851848570653" />
+                  <mssgle:LineSegment
+                    End="-18.9185175067113,45.2703697141306" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-29.3347665658556,31.3851848570653,39.751015625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Customer Dimension ETL\OLE DB Command"
+          TopLeft="73.1481441515097,403.481478675722" />
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Derived Column Output]"
+          TopLeft="156.029625278859,323.748146186125">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-25.8148144606823,79.7333324895964"
+              Start="0,0"
+              End="-25.8148144606823,72.2333324895964">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.3865397829165" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.3865397829165"
+                    Point2="0,47.3865397829165"
+                    Point3="-4,47.3865397829165" />
+                  <mssgle:LineSegment
+                    End="-21.8148144606823,47.3865397829165" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-21.8148144606823,47.3865397829165"
+                    Point2="-25.8148144606823,47.3865397829165"
+                    Point3="-25.8148144606823,51.3865397829165" />
+                  <mssgle:LineSegment
+                    End="-25.8148144606823,72.2333324895964" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Customer Dimension ETL\Derived Column 1"
+          TopLeft="294.44442835671,116.29629550613" />
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\Customer Dimension ETL\Union All"
+          TopLeft="310.185168237415,290.592590590392" />
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Lookup No Match Output]"
+          TopLeft="235.94814141963,133.837036260263">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="58.4962869370798,0"
+              Start="0,0"
+              End="50.9962869370798,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="50.9962869370798,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-30.3082432502101,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[Derived Column Output1]"
+          TopLeft="372.714798297062,157.89629550613">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,132.696295084262"
+              Start="0,0"
+              End="0,125.196295084262">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,125.196295084262" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Customer Dimension ETL.Paths[OLE DB Command Output]"
+          TopLeft="183.281477484843,403.481478675722">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="168.237024085905,-71.2888880853299"
+              Start="0,0"
+              End="168.237024085905,-63.7888880853299">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-31.4814064274609" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-31.4814064274609"
+                    Point2="0,-35.4814064274609"
+                    Point3="4,-35.4814064274609" />
+                  <mssgle:LineSegment
+                    End="164.237024085905,-35.4814064274609" />
+                  <mssgle:CubicBezierSegment
+                    Point1="164.237024085905,-35.4814064274609"
+                    Point2="168.237024085905,-35.4814064274609"
+                    Point3="168.237024085905,-39.4814064274609" />
+                  <mssgle:LineSegment
+                    End="168.237024085905,-63.7888880853299" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Customer Dimension ETL\OLE DB Destination"
-          TopLeft="396.666644993756,338.86666431023" />
+          TopLeft="353.703684378186,405.185182386122" />
         <EdgeLayout
-          Id="Package\Customer Dimension ETL.Paths[OLE DB Destination Error Output]"
-          TopLeft="482.266644993756,338.86666431023">
+          Id="Package\Customer Dimension ETL.Paths[Union All Output 1]"
+          TopLeft="388.851834904081,332.192590590392">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="38.833331102299,-38.133332778878"
+              EndConnector="50.451849474105,72.9925917957299"
               Start="0,0"
-              End="38.833331102299,-30.633332778878">
+              End="50.451849474105,65.4925917957299">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-15.066666389439" />
+                    End="0,25.7732940219425" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,-15.066666389439"
-                    Point2="0,-19.066666389439"
-                    Point3="4,-19.066666389439" />
+                    Point1="0,25.7732940219425"
+                    Point2="0,29.7732940219425"
+                    Point3="4,29.7732940219425" />
                   <mssgle:LineSegment
-                    End="34.833331102299,-19.066666389439" />
+                    End="46.451849474105,29.7732940219425" />
                   <mssgle:CubicBezierSegment
-                    Point1="34.833331102299,-19.066666389439"
-                    Point2="38.833331102299,-19.066666389439"
-                    Point3="38.833331102299,-23.066666389439" />
+                    Point1="46.451849474105,29.7732940219425"
+                    Point2="50.451849474105,29.7732940219425"
+                    Point3="50.451849474105,33.7732940219425" />
                   <mssgle:LineSegment
-                    End="38.833331102299,-30.633332778878" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-53.7922406988505,-14.066666389439,146.4178125,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Customer Dimension ETL.Paths[Lookup Match Output]"
-          TopLeft="161.399994263053,290.333331603673">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="31.2333327414261,45.9333327246375"
-              Start="0,0"
-              End="31.2333327414261,38.4333327246375">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.9666663623188" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,18.9666663623188"
-                    Point2="0,22.9666663623188"
-                    Point3="4,22.9666663623188" />
-                  <mssgle:LineSegment
-                    End="27.2333327414261,22.9666663623188" />
-                  <mssgle:CubicBezierSegment
-                    Point1="27.2333327414261,22.9666663623188"
-                    Point2="31.2333327414261,22.9666663623188"
-                    Point3="31.2333327414261,26.9666663623188" />
-                  <mssgle:LineSegment
-                    End="31.2333327414261,38.4333327246375" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-32.574720348037,27.9666663623188,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Customer Dimension ETL.Paths[Flat File Source Output]"
-          TopLeft="110.599998087684,85.7999996926387">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="23.2333321950503,58.9333326342371"
-              Start="0,0"
-              End="23.2333321950503,51.4333326342371">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.4666663171185" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,25.4666663171185"
-                    Point2="0,29.4666663171185"
-                    Point3="4,29.4666663171185" />
-                  <mssgle:LineSegment
-                    End="19.2333321950503,29.4666663171185" />
-                  <mssgle:CubicBezierSegment
-                    Point1="19.2333321950503,29.4666663171185"
-                    Point2="23.2333321950503,29.4666663171185"
-                    Point3="23.2333321950503,33.4666663171185" />
-                  <mssgle:LineSegment
-                    End="23.2333321950503,51.4333326342371" />
+                    End="50.451849474105,65.4925917957299" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1298,95 +1655,31 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Customer Dimension ETL\Row Count"
+          TopLeft="337.037018622146,32.7407405130657" />
         <EdgeLayout
-          Id="Package\Customer Dimension ETL.Paths[Derived Column Output]"
-          TopLeft="213.866660474406,429.866663677428">
+          Id="Package\Customer Dimension ETL.Paths[Flat File Source Error Output]"
+          TopLeft="255.459253562785,54.0703701390124">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="268.39998451935,-49.399999367198"
+              EndConnector="81.5777650593613,0"
               Start="0,0"
-              End="268.39998451935,-41.899999367198">
+              End="74.0777650593613,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-16.067150002012" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,-16.067150002012"
-                    Point2="0,-20.067150002012"
-                    Point3="4,-20.067150002012" />
-                  <mssgle:LineSegment
-                    End="264.39998451935,-20.067150002012" />
-                  <mssgle:CubicBezierSegment
-                    Point1="264.39998451935,-20.067150002012"
-                    Point2="268.39998451935,-20.067150002012"
-                    Point3="268.39998451935,-24.067150002012" />
-                  <mssgle:LineSegment
-                    End="268.39998451935,-41.899999367198" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Customer Dimension ETL.Paths[Data Conversion Output]"
-          TopLeft="133.833330282735,186.333332326876">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="27.5666639803186,62.399999276797"
-              Start="0,0"
-              End="27.5666639803186,54.899999276797">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,27.1999996383985" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,27.1999996383985"
-                    Point2="0,31.1999996383985"
-                    Point3="4,31.1999996383985" />
-                  <mssgle:LineSegment
-                    End="23.5666639803186,31.1999996383985" />
-                  <mssgle:CubicBezierSegment
-                    Point1="23.5666639803186,31.1999996383985"
-                    Point2="27.5666639803186,31.1999996383985"
-                    Point3="27.5666639803186,35.1999996383985" />
-                  <mssgle:LineSegment
-                    End="27.5666639803186,54.899999276797" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Customer Dimension ETL.Paths[Changed]"
-          TopLeft="191.183327072776,377.86666432831">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,51.9999993491173"
-              Start="0,0"
-              End="0,44.4999993491173">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,44.4999993491173" />
+                    End="74.0777650593613,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-19.8755078125,16.4184567058087,39.751015625,11.6630859375"
+              BoundingBox="-26.5875041890693,5,127.2527734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1399,7 +1692,7 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:string">false</Value>
+          type="q2:boolean">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1409,7 +1702,7 @@ WHERE CustomerID = ? AND IsCurrent = 1</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:string">0</Value>
+          type="q4:int">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
